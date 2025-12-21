@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+  <title>Yomiban!</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div id="menu-bar" class="interactable">
+    <div class="left" role="menu">
+      <button class="menubar-btn" id="menu-btn">MENU</button>
+      <h5>Yomiban - Websocket text renderer</h5>
+    </div>
+
+    <div class="right">
+      <button class="menubar-btn " id="minimize-btn">-</button>
+      <button class="menubar-btn " id="minimize-btn">-</button>
+      <button class="menubar-btn " id="max-unmax-btn">MA</button>
+      <button class="menubar-btn " id="close-btn">X</button>
+    </div>
+  </div>
+    <div class="container ">
+      <div id="render-target" class="render-text clickthrough">Yomiban is ready. <br>Start websocket to begin!<br>やった </div>
+    </div>
+
+</body>
+
+<script src="./renderer.js"></script> 
+<script src="./pagerenderer.js"></script>
+</html>
