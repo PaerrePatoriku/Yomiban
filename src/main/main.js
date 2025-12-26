@@ -77,8 +77,8 @@ app.whenReady().then(async () => {
     extensionLoader.loadExtensions(config.extensions);
     console.log(`${config.extensions.length} extensions loaded!`);
 
-    // if (config.debug)
-    // window.webContents.openDevTools();
+    if (config.debug)
+        window.webContents.openDevTools();
 
     window.setAlwaysOnTop(true, "normal");
 })
