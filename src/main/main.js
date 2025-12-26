@@ -7,11 +7,9 @@ import { app, BrowserWindow } from "electron";
 import { globalShortcut } from "electron/main";
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { session } from "electron"
-import {join} from "path"
+import { join } from "path"
 
-//const env = process.env.NODE_ENV || 'development';
-//const path = require('path');
-const env = 'development';
+
 
 
 
@@ -20,27 +18,24 @@ const createWindow = () => {
         width: 800,
         height: 600,
         webPreferences: {
-            preload : join(__dirname, '../preload/preload.js')
+            preload: join(__dirname, '../preload/preload.js'),
+            sandbox: false
         },
         frame: false,
         transparent: true
     })
-    //win.loadFile('index.html')
+
     return win;
 }
 
 let window;
 const config = readConfig();
 const extensionLoader = useExtensionLoader();
-
 console.log(config);
+
 
 app.whenReady().then(async () => {
 
-
-    console.log("Loading extensions from config...");
-    extensionLoader.loadExtensions(config.extensions);
-    console.log(`${config.extensions.length} extensions loaded!`);
 
     window = createWindow()
     app.on('activate', () => {
@@ -53,9 +48,9 @@ app.whenReady().then(async () => {
 
     registerIPC(); //Custom menu controls
 
-    
-    Object.keys(config.inputBindings).forEach(action => {        
-        
+
+    Object.keys(config.inputBindings).forEach(action => {
+
         const actionKey = config.inputBindings[action];
         console.log(`Binding ${action} to ${actionKey}`)
         globalShortcut.register(actionKey, () => globals[action]());
@@ -69,12 +64,22 @@ app.whenReady().then(async () => {
         process.kill(pid);
     });
 
-   // if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    //    window.loadURL(process.env['ELECTRON_RENDERER_URL'])
-  //  } else {
+    window.on('ready-to-show', () => {
+        window.show()
+    })
+    if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+        window.loadURL(process.env['ELECTRON_RENDERER_URL'])
+    } else {
         window.loadFile(join(__dirname, '../renderer/index.html'))
-   // }
-    window.webContents.openDevTools();
+    }
+
+    console.log("Loading extensions from config...");
+    extensionLoader.loadExtensions(config.extensions);
+    console.log(`${config.extensions.length} extensions loaded!`);
+
+    // if (config.debug)
+    // window.webContents.openDevTools();
+
     window.setAlwaysOnTop(true, "normal");
 })
 
@@ -83,11 +88,11 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
 })
 
-if (env === 'development') {
-    try {
+//if (is.dev) {
+/*    try {
         require('electron-reloader')(module, {
             debug: false,
             watchRenderer: true
         });
-    } catch (_) { console.log('Error'); }
-}
+    } catch (_) { console.log('Error'); }*/
+//}
