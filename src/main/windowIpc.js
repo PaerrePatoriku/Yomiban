@@ -1,4 +1,4 @@
-const { ipcMain, BrowserWindow, Menu } = require('electron');
+import { ipcMain, BrowserWindow } from 'electron';
 const registerIPC = () =>
 {
         ipcMain.handle('window:isMaximized', (event) => {
@@ -50,4 +50,4 @@ const registerIPC = () =>
         });
     });*/
 }
-module.exports = { registerIPC }
+export { registerIPC }

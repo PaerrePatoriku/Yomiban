@@ -2,19 +2,30 @@
   "name": "yomiban-frontend",
   "version": "1.0.0",
   "description": "Electron based Chromium HTML overlay for websocket exposed text extraction programs",
-  "main": "index.js",
+  "main": "./out/main/main.js",
   "scripts": {
     "start": "electron . --trace-warnings",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start2": "electron-vite preview",
+    "dev": "electron-vite dev",
+    "build" : "electron-vite build",
+    "build:win": "npm run build && electron-builder --win",
+    "build:mac": "npm run build && electron-builder --mac",
+    "build:linux": "npm run build && electron-builder --linux"
   },
   "author": "Patrik Kumpula",
   "license": "MIT",
   "devDependencies": {
     "electron": "^39.2.7",
     "electron-reload": "^2.0.0-alpha.1",
-    "electron-reloader": "^1.2.3"
+    "electron-reloader": "^1.2.3",
+    "electron-vite": "^5.0.0",
+    "electron-builder": "^26.0.12"
   },
   "dependencies": {
-    "electron-chrome-extensions": "^4.9.0"
+    "bootstrap": "^5.3.8",
+    "@electron-toolkit/preload": "^3.0.2",
+    "@electron-toolkit/utils": "^4.0.0"
+
   }
 }
+ 

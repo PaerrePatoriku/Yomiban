@@ -19,4 +19,4 @@ yarn-error.log*
 #Backend binaries
 .backend/
 #Testing extensions
-ext/
+extensions/

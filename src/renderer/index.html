@@ -7,21 +7,20 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
   <title>Yomiban!</title>
-  <link rel="stylesheet" href="styles.css">
+  <link href="./assets/main.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
   <div id="menu-bar" class="interactable">
-    <div class="left" role="menu">
-      <button class="menubar-btn" id="menu-btn">MENU</button>
-      <h5>Yomiban - Websocket text renderer</h5>
+    <div class="left p-2" role="menu">
+      <!--<button class="menubar-btn" id="menu-btn">MENU</button>-->
+      <h4>Yomiban - Websocket text renderer</h4>
     </div>
 
     <div class="right">
-      <button class="menubar-btn " id="minimize-btn">-</button>
-      <button class="menubar-btn " id="minimize-btn">-</button>
-      <button class="menubar-btn " id="max-unmax-btn">MA</button>
-      <button class="menubar-btn " id="close-btn">X</button>
+      <button class="menubar-btn" id="minimize-btn">𑁋</button>
+      <button class="menubar-btn" id="max-unmax-btn">☐</button>
+      <button class="menubar-btn" id="close-btn">x</button>
     </div>
   </div>
     <div class="container ">
@@ -30,6 +29,6 @@
 
 </body>
 
-<script src="./renderer.js"></script> 
-<script src="./pagerenderer.js"></script>
+<script type="module" src="./index.js"></script> 
+<script type="module" src="./pagerenderer.js"></script>
 </html>

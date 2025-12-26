@@ -1,5 +1,6 @@
-const { spawn } = require("child_process")
-const path = require('path');
+
+import { spawn } from "child_process";
+import path from "path";
 
 const childProcesses = {
     "backend": {
@@ -32,4 +33,4 @@ const attachBackend = (app, window, webSocket) => {
     })
     return backend.pid
 }
-module.exports = { attachBackend }
+export { attachBackend }

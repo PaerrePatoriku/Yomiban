@@ -2,6 +2,10 @@
     "webSocket" : "ws://127.0.0.1:9001",
     "extensions" : [{
         "directory" : "likgccmbimhjbgkjambclfkhldnlhbnn/25.11.11.0_0",
-        "openSettings" : true
-    }]
+        "openSettings" : true,
+        "active" : true
+    }],
+    "inputBindings" : {
+        "clickthrough" : "Tab"
+    }
 }

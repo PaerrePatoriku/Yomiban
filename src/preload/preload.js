@@ -22,21 +22,3 @@ contextBridge.exposeInMainWorld('windowControls', {
 });
 
 
-let isMouseOverInteractiveElement = false;
-/*
-
-
-    element.addEventListener('mouseenter', () => {
-      console.log("leaveing interactive")
-      isMouseOverInteractiveElement = true;
-      ipcRenderer.send('set-ignore-mouse-events', true, { forward: true });
-    });
-  });
-  interactiveElements.forEach((element) => {
-    element.addEventListener('mouseenter', () => {
-        console.log("entering interactive")
-        isMouseOverInteractiveElement = false;
-        ipcRenderer.send('set-ignore-mouse-events', false);
-    });
-  });
-});*/

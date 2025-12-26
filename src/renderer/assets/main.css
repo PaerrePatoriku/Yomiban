@@ -3,6 +3,7 @@ body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: white;
+  background: #ffffff00 !important;
 }
 
 #menu-bar {
@@ -14,7 +15,7 @@ body {
   -webkit-app-region: drag;
 }
 
-#menu-bar > div {
+#menu-bar>div {
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -27,7 +28,7 @@ body {
 
 .container {
   height: calc(100vh - 30px);
-  background: #5c3d8d18;
+  background: #5c3d8d0a;
   color: white;
   display: flex;
   justify-content: center;
@@ -53,9 +54,9 @@ button:hover {
 button i {
   color: white;
 }
-.render-text
-{
-    font-family: "Hina Mincho";
+
+.render-text {
+  font-family: "Hina Mincho";
   color: black;
   font-size: 45px;
   text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;

@@ -1,4 +1,7 @@
-const renderTarget = document.getElementById('render-target')
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
+
+
 //Backend bridge functionality
 window.backend.onBridgeEvent(data => {
     renderData(data)
@@ -13,10 +16,10 @@ window.addEventListener("DOMContentLoaded", () => {
   const maxUnmaxButton = document.getElementById("max-unmax-btn");
   const closeButton = document.getElementById("close-btn");
 
-  menuButton.addEventListener("click", e => {
+  /*menuButton.addEventListener("click", e => {
     // Opens menu at (x,y) coordinates of mouse click on the hamburger icon.
     window.windowControls.openMenu(e.x, e.y);
-  });
+  });*/
 
   minimizeButton.addEventListener("click", e => {
     window.windowControls.minimize();
