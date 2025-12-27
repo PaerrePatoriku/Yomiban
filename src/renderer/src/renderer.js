@@ -1,13 +1,21 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap'
+import { useTextRenderer } from './textrenderer'
 
+import jQuery from "jquery";
+
+window.$ = window.jQuery = jQuery;
+
+console.log(window.$);
+
+const tr = useTextRenderer();
 
 //Backend bridge functionality
 window.backend.onBridgeEvent(data => {
-    renderData(data)
-    console.log("[BACKEND MESSAGE]", data);
+  tr.renderData(data)
+  console.log("[BACKEND MESSAGE]", data);
 })
-
+tr.setClickthroughVisuals({ clickIgnored : false });
 
 //All window frame functionality.
 window.addEventListener("DOMContentLoaded", () => {
@@ -46,4 +54,6 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 //Clickthrough functionality
-
+window.mainBridge.onClickthroughToggle(e => {
+  tr.setClickthroughVisuals(e);
+})

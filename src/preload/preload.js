@@ -20,5 +20,7 @@ contextBridge.exposeInMainWorld('windowControls', {
   close: () => ipcRenderer.invoke('window:close'),
   openMenu: (x, y) => ipcRenderer.send('display-app-menu', { x, y })
 });
-
+contextBridge.exposeInMainWorld('mainBridge', {
+  onClickthroughToggle : (callback) => ipcRenderer.on("clickthrough-toggle", (e, v) => callback(v))
+})
 

@@ -6,7 +6,8 @@ function useGlobals (window)
     const globals = {
         "clickthrough": () => {
             inputIgnored = !inputIgnored
-            BrowserWindow.fromWebContents(window.webContents).setIgnoreMouseEvents(inputIgnored)
+            window.setIgnoreMouseEvents(inputIgnored);
+            window.webContents.send('clickthrough-toggle', { clickIgnored : inputIgnored })
         }
     }
     return globals;
