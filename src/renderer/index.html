@@ -34,11 +34,12 @@
     </div>
     <div class="render-area-container" id="render-area-container">
 
-      <div class="w-100 row">
-        <div id="render-target" class="render-area-text" style="width: 95%;">Start websocket to begin!<br>やった </div>
-        <div id="render-area-buttons" style="width: 5%;">           
-          <div>▲</div>
-          <div>▼</div>
+      <div class="w-100 row" id="render-wrapper">
+        <div id="render-target" class="render-area-text col-11" >Start websocket to begin!<br>やった </div>
+        <div id="render-area-buttons" class="col-1">           
+          <div class="btn btn-outline-secondary render-area-button" id="data-previous-btn" title="previous text">▲</div>
+          <div class="btn btn-outline-secondary render-area-button" id="data-next-btn" title="next text">▼</div>
+          <div class="text-fade"  ><span id="render-current-indicator">1</span>/<span id="render-count-indicator">5</span></div>
         </div>
       </div>
     </div>

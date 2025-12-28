@@ -1,14 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'
 import { useTextRenderer } from './textrenderer'
-
 import jQuery from "jquery";
-
 window.$ = window.jQuery = jQuery;
 
-console.log(window.$);
 
-const tr = useTextRenderer();
+const cfg = await window.config.get();
+
+const tr = useTextRenderer(cfg);
 
 //Backend bridge functionality
 window.backend.onBridgeEvent(data => {

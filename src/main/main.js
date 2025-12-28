@@ -1,6 +1,6 @@
 import { registerIPC } from "./windowIpc"
-import { attachBackend } from "./backendBridge";
-import { readConfig } from "./config"
+import { useBackend } from "./backendBridge";
+import { useConfig } from "./config"
 import { useGlobals } from "./shortcuts"
 import { useExtensionLoader } from "./extensions";
 import { app, BrowserWindow } from "electron";
@@ -29,8 +29,10 @@ const createWindow = () => {
 }
 
 let window;
-const config = readConfig();
+const config = useConfig();
 const extensionLoader = useExtensionLoader();
+const backend = useBackend();
+
 console.log(config);
 
 
@@ -49,20 +51,14 @@ app.whenReady().then(async () => {
     registerIPC(); //Custom menu controls
 
 
-    Object.keys(config.inputBindings).forEach(action => {
+    Object.keys(config.getConfig().inputBindings).forEach(action => {
 
-        const actionKey = config.inputBindings[action];
+        const actionKey = config.getConfig().inputBindings[action];
         console.log(`Binding ${action} to ${actionKey}`)
         globalShortcut.register(actionKey, () => globals[action]());
     })
 
-    const pid = attachBackend(app, window, config.webSocket); //Stdio bridge to backend
-    //Lifecycle handling for child process
-    app.on("window-all-closed", async () => {
 
-        app.quit();
-        process.kill(pid);
-    });
 
     window.on('ready-to-show', () => {
         window.show()
@@ -74,13 +70,23 @@ app.whenReady().then(async () => {
     }
 
     console.log("Loading extensions from config...");
-    extensionLoader.loadExtensions(config.extensions);
-    console.log(`${config.extensions.length} extensions loaded!`);
+    extensionLoader.loadExtensions(config.getConfig().extensions);
+    console.log(`${config.getConfig().extensions.length} extensions loaded!`);
 
-    if (config.debug)
+    if (config.getConfig().debug)
         window.webContents.openDevTools();
 
     window.setAlwaysOnTop(true, "normal");
+
+    const pid = backend.attachBackend(app, window, config.getConfig().webSocket); //Stdio bridge to backend
+    backend.connectBackend();
+    backend.connectBackend();
+    //Lifecycle handling for child process
+    app.on("window-all-closed", async () => {
+
+        app.quit();
+        process.kill(pid);
+    });
 })
 
 //Manage lifecycle

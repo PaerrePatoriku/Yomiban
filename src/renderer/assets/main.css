@@ -47,6 +47,7 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+
 .app-button {
   height: 100%;
   padding: 0 15px;
@@ -74,7 +75,7 @@ button i {
 
 .render-area-container {
 
-  background: #5c3d8d0a;
+  background: #5c3d8d11;
   color: white;
   display: flex;
   justify-content: center;
@@ -94,7 +95,11 @@ button i {
   font-size: 55px;
   font-weight: bolder;
   text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
-
+  transition: all 0.2s ease-in-out;
+}
+.render-area-text-inactive
+{
+  opacity: 0.25;
 }
 #active-state-indicator
 {

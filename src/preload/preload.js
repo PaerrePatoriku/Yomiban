@@ -1,11 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron')
 
-contextBridge.exposeInMainWorld('versions', {
-  node: () => process.versions.node,
-  chrome: () => process.versions.chrome,
-  electron: () => process.versions.electron
-  // we can also expose variables, not just functions
-})
 contextBridge.exposeInMainWorld("backend", {
   onBridgeEvent: (e) => {
     ipcRenderer.on("backend-event", (_, msg) => e(msg));
@@ -24,3 +18,9 @@ contextBridge.exposeInMainWorld('mainBridge', {
   onClickthroughToggle : (callback) => ipcRenderer.on("clickthrough-toggle", (e, v) => callback(v))
 })
 
+contextBridge.exposeInMainWorld('config',  {
+  get: () => ipcRenderer.invoke('config:get'),
+  set: () => ipcRenderer.invoke('config:get'),
+  update: () => ipcRenderer.invoke('config:get'),
+
+})

@@ -8,29 +8,39 @@ const childProcesses = {
         executable: "YomiBanBackend"
     }
 }
-const attachBackend = (app, window, webSocket) => {
+let backend;
+let socket;
 
-    const backendPath = path.join(app.getAppPath(),
-        childProcesses.backend.root,
-        childProcesses.backend.executable)
+function useBackend() {
+    function attachBackend(app, window, webSocket) {
 
-    const backend = spawn(backendPath, [], {
+        const backendPath = path.join(app.getAppPath(),
+            childProcesses.backend.root,
+            childProcesses.backend.executable)
+        socket = webSocket;
+        backend = spawn(backendPath, [])
+        backend.on("spawn", () => {
+            const res = backend.stdin.write(JSON.stringify({ "type" : "Connect", "value" : "ws://127.0.0.1:9001" }) + "\n", 'utf-8', (e) => console.log(e));
+        })
+        backend.stdout.on( "data", data => {
+            const msg = data.toString();
+            console.log("Backend message", msg);
+            window.webContents.send("backend-event", msg);
+        })
+        backend.stderr.on("data", data => {
+            const msg = data.toString();
+            console.log("Backend error message", msg);
+        })
+        backend.on("exit", code => {
+            console.log("Backend process exited, code:", code);
+        })
+        backend.on("message", (e) => console.log(e));
+        console.log(backend.pid);
+        return backend.pid
+    }
+    function connectBackend() {
 
-        stdio: ["pipe", "pipe", "pipe"]
-    })
-    backend.stdin.write(JSON.stringify({ "type" : "Connect", "value" : webSocket }))
-    backend.stdout.on("data", data => {
-        const msg = data.toString();
-        console.log("Backend message", msg);
-        window.webContents.send("backend-event", msg);
-    })
-    backend.stderr.on("data", data => {
-        const msg = data.toString();
-        console.log("Backend error message", msg);
-    })
-    backend.on("exit", code => {
-        console.log("Backend process exited, code:", code);
-    })
-    return backend.pid
+    }
+    return { attachBackend, connectBackend }
 }
-export { attachBackend }
+export { useBackend }
