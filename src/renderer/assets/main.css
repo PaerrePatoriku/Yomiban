@@ -75,7 +75,7 @@ button i {
 
 .render-area-container {
 
-  background: #5c3d8d11;
+
   color: white;
   display: flex;
   justify-content: center;
@@ -83,11 +83,12 @@ button i {
   text-align: center;
   flex: 1; 
   overflow: hidden;
-
+  background: #ffffff00;
 }
 .render-area-active
 {
     border: 1px red dashed;
+    background: #5c3d8d11;
 }
 .render-area-text {
   font-family: "Hina Mincho";
