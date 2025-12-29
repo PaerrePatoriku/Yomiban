@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: electron-app
+appId: com.pku.yomiban
+productName: Yomiban!
 directories:
   buildResources: build
 files:
@@ -11,20 +11,12 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: electron-app
+  executableName: yomiban
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
   uninstallDisplayName: ${productName}
   createDesktopShortcut: always
-mac:
-  entitlementsInherit: build/entitlements.mac.plist
-  extendInfo:
-    - NSCameraUsageDescription: Application requests access to the device's camera.
-    - NSMicrophoneUsageDescription: Application requests access to the device's microphone.
-    - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
-    - NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
-  notarize: false
 dmg:
   artifactName: ${name}-${version}.${ext}
 linux:
@@ -32,10 +24,10 @@ linux:
     - AppImage
     - snap
     - deb
-  maintainer: electronjs.org
+  maintainer: pku
   category: Utility
 appImage:
-  artifactName: ${name}-${version}.${ext}
+  artifactName: Yomiban
 npmRebuild: false
 publish:
   provider: generic
