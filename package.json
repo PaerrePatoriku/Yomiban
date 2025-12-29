@@ -18,22 +18,14 @@
     "linux": {
       "target": "AppImage",
       "category": "Utility"
-    }
+    },
+      "extraResources": [
+    {
+      "from": "lib",
+      "to": "lib"
+    } ]
   },
-  "extraResources": [
-    {
-      "from": "configuration",
-      "to": "configuration"
-    },
-    {
-      "from": "extensions",
-      "to": "extensions"
-    },
-    {
-      "from": ".backend",
-      "to": ".backend"
-    }
-  ],
+
   "devDependencies": {
     "electron": "^39.2.7",
     "electron-builder": "^26.0.12",

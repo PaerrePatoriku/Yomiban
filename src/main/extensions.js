@@ -1,12 +1,15 @@
 import { session } from "electron"
 import { join } from 'path'
 import { app, BrowserWindow } from 'electron';
+import { useAppFolder } from './appfolder';
+
+const appFolder = useAppFolder();
 function useExtensionLoader() {
     function _loadExtension(extension) {
 
         if (extension?.active == false)
             return;
-        const extensionPath = join(app.getAppPath(), "extensions", extension.directory);
+        const extensionPath = join(appFolder.getAppFolder(), "extensions", extension.directory);
         console.log("Loading extension from", extensionPath, "...");
         //Extensions do not function on electron if fileaccess is not given
         session.defaultSession.extensions.loadExtension(extensionPath, { allowFileAccess: true }).then((electronExtension) => {

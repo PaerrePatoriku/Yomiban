@@ -16,7 +16,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#Backend binaries
-.backend/
+#External dependencies (backend etc.)
+lib/
 #Testing extensions
 extensions/

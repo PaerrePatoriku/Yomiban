@@ -2,9 +2,13 @@ const fs = require('fs')
 import { app, ipcMain } from 'electron';
 import path from 'path';
 import { useDefaultConfig } from './defaultconfig';
-const filePath = path.join(app.getAppPath(), "configuration", 'config.json')
+import { useAppFolder } from './appfolder';
+
+
 const defaultConfig = useDefaultConfig();
 const defaults = defaultConfig.getDefaultConfig();
+const appFolder = useAppFolder();
+const filePath = path.join(appFolder.getAppFolder(), "configuration", 'config.json')
 
 function useConfig()
 {

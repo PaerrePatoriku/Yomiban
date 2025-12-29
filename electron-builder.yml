@@ -10,6 +10,8 @@ files:
   - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
 asarUnpack:
   - resources/**
+  - lib/**
+
 win:
   executableName: yomiban
 nsis:

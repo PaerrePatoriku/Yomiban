@@ -78,9 +78,9 @@ app.whenReady().then(async () => {
 
     window.setAlwaysOnTop(true, "normal");
 
-    const pid = backend.attachBackend(app, window, config.getConfig().webSocket); //Stdio bridge to backend
+    const pid = backend.attachBackend(window, config.getConfig().webSocket); //Stdio bridge to backend
     backend.connectBackend();
-    backend.connectBackend();
+
     //Lifecycle handling for child process
     app.on("window-all-closed", async () => {
 

@@ -1,10 +1,11 @@
 
 import { spawn } from "child_process";
+import { app } from 'electron'
 import path from "path";
 
 const childProcesses = {
     "backend": {
-        root: ".backend",
+        root: "lib",
         executable: "YomiBanBackend"
     }
 }
@@ -12,17 +13,25 @@ let backend;
 let socket;
 
 function useBackend() {
-    function attachBackend(app, window, webSocket) {
+    function getBackendPath() {
+        if (app.isPackaged) {
+            return process.resourcesPath
+        } else {
+            return app.getAppPath()
+        }
+    }
+    function attachBackend(window, webSocket) {
 
-        const backendPath = path.join(app.getAppPath(),
+        const backendPath = path.join(getBackendPath(),
             childProcesses.backend.root,
-            childProcesses.backend.executable)
+            childProcesses.backend.executable);
+        console.log("backend path", backendPath);
         socket = webSocket;
         backend = spawn(backendPath, [])
         backend.on("spawn", () => {
-            const res = backend.stdin.write(JSON.stringify({ "type" : "Connect", "value" : "ws://127.0.0.1:9001" }) + "\n", 'utf-8', (e) => console.log(e));
+            const res = backend.stdin.write(JSON.stringify({ "type": "Connect", "value": "ws://127.0.0.1:9001" }) + "\n", 'utf-8', (e) => console.log(e));
         })
-        backend.stdout.on( "data", data => {
+        backend.stdout.on("data", data => {
             const msg = data.toString();
             console.log("Backend message", msg);
             window.webContents.send("backend-event", msg);
