@@ -76,8 +76,8 @@ function useTextRenderer(config) {
     }
     init();
 
-    renderData('{ "Text" : "Welcome to yomiban!" }');
-    renderData('{ "Text" : "" }');
+    renderData('{ "Text" : "Welcome to yomiban! Ready up your text extraction program" }');
+
 
     return { renderData, setClickthroughVisuals }
 }

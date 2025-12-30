@@ -3,6 +3,7 @@ import { useBackend } from "./backendBridge";
 import { useConfig } from "./config"
 import { useGlobals } from "./shortcuts"
 import { useExtensionLoader } from "./extensions";
+import { useResourceHelper  } from "./resourcehelper";
 import { app, BrowserWindow } from "electron";
 import { globalShortcut } from "electron/main";
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
@@ -10,8 +11,11 @@ import { session } from "electron"
 import { join } from "path"
 
 
-
-
+let window;
+const helper = useResourceHelper();
+const config = useConfig();
+const extensionLoader = useExtensionLoader();
+const backend = useBackend();
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -21,6 +25,7 @@ const createWindow = () => {
             preload: join(__dirname, '../preload/preload.js'),
             sandbox: false
         },
+        icon : join(helper.getResourcePath(), "images", "main-icon.png"),
         frame: false,
         transparent: true
     })
@@ -28,10 +33,7 @@ const createWindow = () => {
     return win;
 }
 
-let window;
-const config = useConfig();
-const extensionLoader = useExtensionLoader();
-const backend = useBackend();
+
 
 console.log(config);
 

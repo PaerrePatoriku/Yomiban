@@ -21,8 +21,7 @@
     },
       "extraResources": [
     {
-      "from": "lib",
-      "to": "lib"
+      "from": "resources"
     } ]
   },
 
