@@ -76,8 +76,8 @@ function useTextRenderer(config) {
     }
     init();
 
-    renderData('{ "Text" : "TEST RENDER" }');
-    renderData('{ "Text" : "TEST RENDER 2" }');
+    renderData('{ "Text" : "Welcome to yomiban!" }');
+    renderData('{ "Text" : "" }');
 
     return { renderData, setClickthroughVisuals }
 }

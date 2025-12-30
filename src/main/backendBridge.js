@@ -1,7 +1,6 @@
-
 import { spawn } from "child_process";
-import { app } from 'electron'
 import path from "path";
+import { useResourceHelper  } from "./resourcehelper";
 
 const childProcesses = {
     "backend": {
@@ -9,27 +8,19 @@ const childProcesses = {
         executable: "YomiBanBackend"
     }
 }
-let backend;
-let socket;
+const resourceHelper = useResourceHelper();
 
 function useBackend() {
-    function getBackendPath() {
-        if (app.isPackaged) {
-            return process.resourcesPath
-        } else {
-            return app.getAppPath()
-        }
-    }
     function attachBackend(window, webSocket) {
 
-        const backendPath = path.join(getBackendPath(),
+        const backendPath = path.join(resourceHelper.getResourcePath(),
             childProcesses.backend.root,
             childProcesses.backend.executable);
         console.log("backend path", backendPath);
-        socket = webSocket;
-        backend = spawn(backendPath, [])
+
+        const backend = spawn(backendPath, [])
         backend.on("spawn", () => {
-            const res = backend.stdin.write(JSON.stringify({ "type": "Connect", "value": "ws://127.0.0.1:9001" }) + "\n", 'utf-8', (e) => console.log(e));
+            const res = backend.stdin.write(JSON.stringify({ "type": "Connect", "value": webSocket }) + "\n", 'utf-8', (e) => console.log(e));
         })
         backend.stdout.on("data", data => {
             const msg = data.toString();
