@@ -1,4 +1,5 @@
 # Yomiban! A ~~multiplatform~~ Linux UI app for websocket based text extraction
+<img width="1622" height="964" alt="image" src="https://github.com/user-attachments/assets/1ff5e96f-4c6e-4302-81be-11ce51f65964" />
 
 Hello !  
 I made Yomiban as a Linux compatible application as a replacement for the well designed UI of LunaTranslator.    
