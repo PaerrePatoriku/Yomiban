@@ -33,12 +33,10 @@ The possibility of using the Yomitan floating dictionary "within the application
 Basically the UI of LunaTranslator is a floating, transparent overlay, that is also clickthrough.  
 
 This meant that the UI could be kept on top of any app that is being extracted, and whenever I need  
-a word translated, I could just toggle the clickthrough state with a hotkey, hover the text within the UI and have the  
-Yomitan dictionary pop up. 
+a word translated, I could just toggle the clickthrough state with a hotkey, hover the text within the UI and have the  Yomitan dictionary pop up. 
 
 In terms of UX, this is much, much better than having a separate, non-overlayed browser window.  
-This made immersion learning with VNs a way more enjoyable learning experience, since I no longer had to whip  
-the mouse around to some external window outside the bounds of the running application.
+This made immersion learning with VNs a way more enjoyable learning experience, since I no longer had to whip   the mouse around to some external window outside the bounds of the running application.
 
 ## Tragedy strikes
 
