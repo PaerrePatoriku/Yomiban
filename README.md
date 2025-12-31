@@ -5,6 +5,8 @@ I made Yomiban as a Linux compatible application as a replacement for the well d
 Use of this tool does not require the use of LunaTranslator. The point is to provide a multiplatform   
 text extraction display window that is compatible with chrome extensions.  
 
+Currently only a Linux version has been released.
+
 
 ## #TLDR Features
 - UI to display text from text extraction programs (using websockets)
@@ -108,6 +110,8 @@ WIN (%APPDATA%/Roaming/Yomiban)
 LINUX (~/.config/Yomiban) 
 will be generated. 
 
+Extract the app file anywhere you want, and open it with your terminal (e.g ./yomiban-frontend-1.0.0.AppImage)  
+(for the initial release, the app must be launched from terminal. Some issue prevents a child process launching correctly, but I have not corrected this yet.)  
 On start, default configuration will be used. Which means no chrome extensions by default.  
 You need to add these yourself, 
 since I dont necessarily want to package the work of Yomitan devs within this app.  
