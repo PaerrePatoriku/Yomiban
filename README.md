@@ -5,7 +5,8 @@ I made Yomiban as a Linux compatible application as a replacement for the well d
 Use of this tool does not require the use of LunaTranslator. The point is to provide a multiplatform   
 text extraction display window that is compatible with chrome extensions.  
 
-Currently only a Linux version has been released.
+Currently only a Linux version has been released.  
+[Release page link](https://github.com/PaerrePatoriku/Yomiban/releases)
 
 
 ## #TLDR Features
