@@ -1,4 +1,4 @@
-# Yomiban! A multiplatform UI for websocket based text extraction
+# Yomiban! A ~~multiplatform~~ Linux UI app for websocket based text extraction
 
 Hello !  
 I made Yomiban as a Linux compatible application as a replacement for the well designed UI of LunaTranslator.    
@@ -6,7 +6,8 @@ Use of this tool does not require the use of LunaTranslator. The point is to pro
 text extraction display window that is compatible with chrome extensions.  
 
 Currently only a Linux version has been released.  
-[Release page link](https://github.com/PaerrePatoriku/Yomiban/releases)
+[Release page link](https://github.com/PaerrePatoriku/Yomiban/releases)  
+I might eventually also release a windows version.  
 
 
 ## #TLDR Features
