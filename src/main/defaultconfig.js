@@ -3,11 +3,14 @@ function useDefaultConfig() {
         return {
 
             webSocket: "ws://127.0.0.1:9001",
-            debug: true,
+            development : {
+                showInspector : false,
+                sendPings : false, 
+            },
             extensions: [
                 {
                     directory: "likgccmbimhjbgkjambclfkhldnlhbnn/25.11.11.0_0",
-                    openSettings: false,
+                    openSettings: true,
                     active: true
                 }
             ],

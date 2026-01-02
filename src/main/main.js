@@ -13,9 +13,11 @@ import { join } from "path"
 
 let window;
 const helper = useResourceHelper();
-const config = useConfig();
+const configHelper = useConfig();
 const extensionLoader = useExtensionLoader();
 const backend = useBackend();
+
+const config = configHelper.getConfig();
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -34,12 +36,7 @@ const createWindow = () => {
 }
 
 
-
-console.log(config);
-
-
 app.whenReady().then(async () => {
-
 
     window = createWindow()
     app.on('activate', () => {
@@ -49,13 +46,11 @@ app.whenReady().then(async () => {
 
     const globals = useGlobals(window); //Global shortfuck functions.
 
-
     registerIPC(); //Custom menu controls
 
+    Object.keys(config.inputBindings).forEach(action => {
 
-    Object.keys(config.getConfig().inputBindings).forEach(action => {
-
-        const actionKey = config.getConfig().inputBindings[action];
+        const actionKey = config.inputBindings[action];
         console.log(`Binding ${action} to ${actionKey}`)
         globalShortcut.register(actionKey, () => globals[action]());
     })
@@ -72,15 +67,15 @@ app.whenReady().then(async () => {
     }
 
     console.log("Loading extensions from config...");
-    extensionLoader.loadExtensions(config.getConfig().extensions);
-    console.log(`${config.getConfig().extensions.length} extensions loaded!`);
+    extensionLoader.loadExtensions(config.extensions);
+    console.log(`${config.extensions.length} extensions loaded!`);
 
-    if (config.getConfig().debug)
+    if (config.development.showInspector)
         window.webContents.openDevTools();
 
     window.setAlwaysOnTop(true, "normal");
 
-    const pid = backend.attachBackend(window, config.getConfig().webSocket); //Stdio bridge to backend
+    const pid = backend.attachBackend(window, config.webSocket); //Stdio bridge to backend
     backend.connectBackend();
 
     //Lifecycle handling for child process
@@ -96,11 +91,3 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
 })
 
-//if (is.dev) {
-/*    try {
-        require('electron-reloader')(module, {
-            debug: false,
-            watchRenderer: true
-        });
-    } catch (_) { console.log('Error'); }*/
-//}

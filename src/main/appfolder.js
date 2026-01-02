@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from "path";
 import { app } from 'electron';
 import { useResourceHelper  } from "./resourcehelper";
-
+import { useDefaultConfig  } from './defaultconfig';
 const helper = useResourceHelper();
 const isWindows = process.platform == "win32";
 const appDataFolder = isWindows ? `${app.getPath("appData")}/Roaming` : `${app.getPath("appData")}`;
@@ -21,8 +21,7 @@ function useAppFolder()
         if (!fs.existsSync(configFolder))
         {
             fs.mkdirSync(configFolder);
-            fs.copyFileSync(path.join(helper.getResourcePath(), "defaults", "configuration", "config.json"),
-            path.join(configFolder, "config.json"));
+            fs.writeFileSync(path.join(configFolder, "config.json"), JSON.stringify(useDefaultConfig().getDefaultConfig(), null, 2))
         }
         if (!fs.existsSync(extensionFolder))
         {
