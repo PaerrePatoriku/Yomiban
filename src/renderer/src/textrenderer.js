@@ -17,6 +17,9 @@ function useTextRenderer(config) {
         if (textData.data.length >= 5) {
             textData.data.shift();
         }
+
+        data.Text = data.Text.replace("\n", "<br/>")
+        
         textData.data.push(data);
         textData.currentIndex = textData.data.length - 1;
         renderCurrent.html(textData.currentIndex + 1);
@@ -25,8 +28,10 @@ function useTextRenderer(config) {
     }
     function renderData(data) {
 
-        const jsonParsed = JSON.parse(data);
-        _addData(jsonParsed);
+        const parsedMessage = JSON.parse(data);
+        console.log("PARSED DATA IS", parsedMessage);
+
+        _addData(parsedMessage);
         setRenderedData(textData.currentIndex);
     }
     function setRenderedData(idx) {
