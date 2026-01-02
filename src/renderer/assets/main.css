@@ -83,12 +83,30 @@ button i {
   overflow: hidden;
   background: #ffffff00;
 }
+:root {
+    --checker-color-1: #9a72db49;
+    --checker-color-2: #5f3e9533;
+    --checker-size: 30px;
+    --checker-gradient: linear-gradient(45deg, var(--checker-color-1) 25%, transparent 25%, transparent 75%, var(--checker-color-1) 75%);
+
+}
 .render-area-active
 {
-    border-right: 1px  #9a72db dashed;
-    border-left: 1px #9a72db dotted;
-    border-bottom: 1px  #9a72db dashed;
-    background: #5c3d8d11;
+    border-right: 2px  #9a72db dashed;
+    border-left: 2px #9a72db dotted;
+    border-bottom: 2px  #9a72db dashed;
+    /*background: #9a72db8a;*/
+    transition: all 0.2s ease-in-out;
+    background-color: var(--checker-color-2);
+    background-image: var(--checker-gradient), var(--checker-gradient);
+    background-position: 0 0, var(--checker-size) var(--checker-size);
+    background-size: calc(var(--checker-size) * 2) calc(var(--checker-size) * 2);
+}
+.render-area-active:hover
+{
+  border-color: orange;
+
+
 }
 .render-area-text {
   font-family: "Hina Mincho";
