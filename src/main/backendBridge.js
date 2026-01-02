@@ -10,7 +10,7 @@ const childProcesses = {
 }
 const resourceHelper = useResourceHelper();
 
-function useBackend() {
+function useBackend(config) {
     function attachBackend(window, webSocket) {
 
         const backendPath = path.join(resourceHelper.getResourcePath(),
@@ -20,7 +20,12 @@ function useBackend() {
 
         const backend = spawn(backendPath, { stdio : ["pipe", "pipe", "pipe"], shell : true})
         backend.on("spawn", () => {
-            const res = backend.stdin.write(JSON.stringify({ "type": "Connect", "value": webSocket }) + "\n", 'utf-8', (e) => console.log(e));
+
+            if (config.development.sendPings)
+                backend.stdin.write(JSON.stringify({ type: "TestMode", value: null}) + "\n", 'utf-8', (e) => console.log(e));
+            else
+                backend.stdin.write(JSON.stringify({ type: "Connect", value: webSocket }) + "\n", 'utf-8', (e) => console.log(e));
+
         })
         backend.stdout.on("data", data => {
             const msg = data.toString();

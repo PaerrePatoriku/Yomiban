@@ -6,18 +6,16 @@ import { useExtensionLoader } from "./extensions";
 import { useResourceHelper  } from "./resourcehelper";
 import { app, BrowserWindow } from "electron";
 import { globalShortcut } from "electron/main";
-import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import { session } from "electron"
+import { is } from '@electron-toolkit/utils'
 import { join } from "path"
 
 
 let window;
-const helper = useResourceHelper();
 const configHelper = useConfig();
-const extensionLoader = useExtensionLoader();
-const backend = useBackend();
-
 const config = configHelper.getConfig();
+const resources = useResourceHelper();
+const extensionLoader = useExtensionLoader();
+
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -27,7 +25,7 @@ const createWindow = () => {
             preload: join(__dirname, '../preload/preload.js'),
             sandbox: false
         },
-        icon : join(helper.getResourcePath(), "images", "main-icon.png"),
+        icon : join(resources.getResourcePath(), "images", "main-icon.png"),
         frame: false,
         transparent: true
     })
@@ -55,11 +53,8 @@ app.whenReady().then(async () => {
         globalShortcut.register(actionKey, () => globals[action]());
     })
 
+    window.on('ready-to-show', () => window.show() )
 
-
-    window.on('ready-to-show', () => {
-        window.show()
-    })
     if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
         window.loadURL(process.env['ELECTRON_RENDERER_URL'])
     } else {
@@ -75,12 +70,15 @@ app.whenReady().then(async () => {
 
     window.setAlwaysOnTop(true, "normal");
 
-    const pid = backend.attachBackend(window, config.webSocket); //Stdio bridge to backend
-    backend.connectBackend();
+
+    app.on("web-contents-created", () => {
+        const backend = useBackend(config);
+        const pid = backend.attachBackend(window, config.webSocket); //Stdio bridge to backend
+        backend.connectBackend();
+    })
 
     //Lifecycle handling for child process
     app.on("window-all-closed", async () => {
-
         app.quit();
         process.kill(pid);
     });
