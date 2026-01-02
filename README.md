@@ -1,11 +1,14 @@
-# Yomiban! A multiplatform UI for websocket based text extraction
+# Yomiban! A ~~multiplatform~~ Linux UI app for websocket based text extraction
+<img width="1622" height="964" alt="image" src="https://github.com/user-attachments/assets/1ff5e96f-4c6e-4302-81be-11ce51f65964" />
 
 Hello !  
 I made Yomiban as a Linux compatible application as a replacement for the well designed UI of LunaTranslator.    
 Use of this tool does not require the use of LunaTranslator. The point is to provide a multiplatform   
 text extraction display window that is compatible with chrome extensions.  
 
-Currently only a Linux version has been released.
+Currently only a Linux version has been released.  
+[Release page link](https://github.com/PaerrePatoriku/Yomiban/releases)  
+I might eventually also release a windows version.  
 
 
 ## #TLDR Features
@@ -30,12 +33,10 @@ The possibility of using the Yomitan floating dictionary "within the application
 Basically the UI of LunaTranslator is a floating, transparent overlay, that is also clickthrough.  
 
 This meant that the UI could be kept on top of any app that is being extracted, and whenever I need  
-a word translated, I could just toggle the clickthrough state with a hotkey, hover the text within the UI and have the  
-Yomitan dictionary pop up. 
+a word translated, I could just toggle the clickthrough state with a hotkey, hover the text within the UI and have the  Yomitan dictionary pop up. 
 
 In terms of UX, this is much, much better than having a separate, non-overlayed browser window.  
-This made immersion learning with VNs a way more enjoyable learning experience, since I no longer had to whip  
-the mouse around to some external window outside the bounds of the running application.
+This made immersion learning with VNs a way more enjoyable learning experience, since I no longer had to whip   the mouse around to some external window outside the bounds of the running application.
 
 ## Tragedy strikes
 
@@ -110,14 +111,13 @@ WIN (%APPDATA%/Roaming/Yomiban)
 LINUX (~/.config/Yomiban) 
 will be generated. 
 
-Extract the app file anywhere you want, and open it with your terminal (e.g ./yomiban-frontend-1.0.0.AppImage)  
-(for the initial release, the app must be launched from terminal. Some issue prevents a child process launching correctly, but I have not corrected this yet.)  
+Extract the app file anywhere you want, and open it with your terminal or directly open the executable.  
+Opening in terminal also gives you the main electron process output, incase you need to check for errors.  (extension loading, etc...)    
 On start, default configuration will be used. Which means no chrome extensions by default.  
-You need to add these yourself, 
-since I dont necessarily want to package the work of Yomitan devs within this app.  
+You need to add those yourself,  since I dont necessarily want to package the work of Yomitan devs within this app.  
 Figure out where your choice of chromium browser saves extensions, then grab the extensions you want and then copy the whole unpackaged extension folder to APPDATA/Yomiban/extensions.  
-Then you need to edit APPDATA/Yomiban/configuration/config.json  
-
+Then you need to edit APPDATA/Yomiban/configuration/config.json  (config guide below)  
+Once done, close the app once, then reopen to initialize the extensions.  
 
 ## Editing the config and preparing extensions
 The idea of the config is to make this as modular as possible, but so far the options are somewhat limited, but this is how to configure: 
