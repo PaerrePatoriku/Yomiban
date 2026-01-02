@@ -75,13 +75,16 @@ app.whenReady().then(async () => {
         const backend = useBackend(config);
         const pid = backend.attachBackend(window, config.webSocket); //Stdio bridge to backend
         backend.connectBackend();
+
+        //Lifecycle handling for child process
+        app.on("window-all-closed", async () => {
+            app.quit();
+            process.kill(pid);
+        });
+        
     })
 
-    //Lifecycle handling for child process
-    app.on("window-all-closed", async () => {
-        app.quit();
-        process.kill(pid);
-    });
+
 })
 
 //Manage lifecycle
