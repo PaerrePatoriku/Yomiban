@@ -16,7 +16,8 @@ body {
   height: 100%;
 }
 .app-title {
-  padding: 0.5rem;
+  margin-left: 8px;
+  align-self: baseline;
 }
 
 .app-title-wrapper {
@@ -24,8 +25,8 @@ body {
 }
 
 .app-logo {
-  padding: 2px;
-  height:40px;
+  padding: 1px;
+  height:25px;
 
 }
 #menu-bar {
@@ -33,6 +34,7 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 40px;
+  border-radius: 8px 8px 0px 0px;
   background: #8C5DD9;
   -webkit-app-region: drag;
 }
@@ -71,7 +73,7 @@ button i {
 
 .render-area-container {
 
-
+  border-radius: 0px 0px 10px 10px;;
   color: white;
   display: flex;
   justify-content: center;
@@ -83,7 +85,9 @@ button i {
 }
 .render-area-active
 {
-    border: 1px red dashed;
+    border-right: 1px  #9a72db dashed;
+    border-left: 1px #9a72db dotted;
+    border-bottom: 1px  #9a72db dashed;
     background: #5c3d8d11;
 }
 .render-area-text {

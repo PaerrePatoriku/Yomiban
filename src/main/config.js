@@ -15,7 +15,7 @@ function useConfig()
     let _cfg;
     function _init() {
         const file = fs.readFileSync(filePath, 'utf8');
-        _cfg = JSON.parse(file);
+        _cfg = { ...defaults, ...JSON.parse(file)}
     }
     function _setDeep(obj, propertyPath, value)
     {

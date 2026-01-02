@@ -12,9 +12,10 @@ function useTextRenderer(config) {
 
     const menuBar = $("#menu-bar");
     let textData = { data: [], currentIndex: 0 };
-
+    const maxMessageCount = config.messages.maxStored;
+    
     function _addData(data) {
-        if (textData.data.length >= 5) {
+        if (textData.data.length >= maxMessageCount) {
             textData.data.shift();
         }
 

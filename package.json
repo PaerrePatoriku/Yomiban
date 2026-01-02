@@ -19,12 +19,24 @@
       "target": "AppImage",
       "category": "Utility"
     },
-      "extraResources": [
-    {
-      "from": "resources"
-    } ]
+    "extraResources": [
+      {
+        "from": "resources"
+      }
+    ]
   },
-
+  "iohook": {
+    "targets": [
+      "node-137",
+      "electron-140"
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "arches": [
+      "x64"
+    ]
+  },
   "devDependencies": {
     "electron": "^39.2.7",
     "electron-builder": "^26.0.12",
@@ -36,6 +48,7 @@
     "@electron-toolkit/preload": "^3.0.2",
     "@electron-toolkit/utils": "^4.0.0",
     "bootstrap": "^5.3.8",
-    "jquery": "^3.7.1"
+    "jquery": "^3.7.1",
+    "uiohook-napi": "^1.5.4"
   }
 }

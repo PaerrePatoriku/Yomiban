@@ -23,10 +23,15 @@
       <div class="app-title-wrapper" role="menu">
         <!--<button class="menubar-btn" id="menu-btn">MENU</button>-->
         <img src="./assets/main-icon.png" class="app-logo"></img>
-        <h4 class="app-title">Yomiban! - Websocket text renderer <span id="active-state-indicator">ACTIVE</span></h4>
+        <h4 class="app-title">Yomiban! - Websocket text renderer 
+
       </div>
 
       <div class="menu-bar-window-buttons">
+        <span id="active-state-indicator">ACTIVE</span></h4>
+        <button class="menubar-btn app-button" title="Change render settings">
+          &lt;文&gt;
+        </button>
         <button class="menubar-btn app-button" id="minimize-btn">𑁋</button>
         <button class="menubar-btn app-button" id="max-unmax-btn">☐</button>
         <button class="menubar-btn app-button" id="close-btn">x</button>
@@ -35,11 +40,12 @@
     <div class="render-area-container" id="render-area-container">
 
       <div class="w-100 row" id="render-wrapper">
-        <div id="render-target" class="render-area-text col-11" >Start websocket to begin!<br>やった </div>
-        <div id="render-area-buttons" class="col-1">           
+        <div id="render-target" class="render-area-text col-11">Start websocket to begin!<br>やった </div>
+        <div id="render-area-buttons" class="col-1">
           <div class="btn btn-outline-secondary render-area-button" id="data-previous-btn" title="previous text">▲</div>
           <div class="btn btn-outline-secondary render-area-button" id="data-next-btn" title="next text">▼</div>
-          <div class="text-fade"  ><span id="render-current-indicator">1</span>/<span id="render-count-indicator">5</span></div>
+          <div class="text-fade"><span id="render-current-indicator">1</span>/<span id="render-count-indicator">5</span>
+          </div>
         </div>
       </div>
     </div>

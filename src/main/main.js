@@ -3,12 +3,12 @@ import { useBackend } from "./backendBridge";
 import { useConfig } from "./config"
 import { useGlobals } from "./shortcuts"
 import { useExtensionLoader } from "./extensions";
-import { useResourceHelper  } from "./resourcehelper";
+import { useResourceHelper } from "./resourcehelper";
 import { app, BrowserWindow } from "electron";
-import { globalShortcut } from "electron/main";
+
 import { is } from '@electron-toolkit/utils'
 import { join } from "path"
-
+import { uIOhook, UiohookKey } from "uiohook-napi";
 
 let window;
 const configHelper = useConfig();
@@ -25,7 +25,7 @@ const createWindow = () => {
             preload: join(__dirname, '../preload/preload.js'),
             sandbox: false
         },
-        icon : join(resources.getResourcePath(), "images", "main-icon.png"),
+        icon: join(resources.getResourcePath(), "images", "main-icon.png"),
         frame: false,
         transparent: true
     })
@@ -46,14 +46,42 @@ app.whenReady().then(async () => {
 
     registerIPC(); //Custom menu controls
 
+
+    const binds = {}
     Object.keys(config.inputBindings).forEach(action => {
 
-        const actionKey = config.inputBindings[action];
+        const actionKey = config.inputBindings[action].key;
         console.log(`Binding ${action} to ${actionKey}`)
-        globalShortcut.register(actionKey, () => globals[action]());
+        const uiokey = Object.keys(UiohookKey).find(x => x === actionKey);
+        binds[UiohookKey[uiokey]] = { callback: globals[action], pressed: false }
+        console.log(binds);
     })
 
-    window.on('ready-to-show', () => window.show() )
+    uIOhook.on("keydown", (e) => {
+
+        if (binds[e.keycode]) {
+            const bind = binds[e.keycode];
+            if (!bind.pressed)
+            {
+                bind.callback();
+                console.log(e.keycode, e.type);
+            }
+            bind.pressed = true;
+        }
+    })
+    uIOhook.on("keyup", (e) => {
+        if (binds[e.keycode]) {
+            const bind = binds[e.keycode];
+            //if (!bind.pressed)
+                //bind.callback();
+            bind.pressed = false;
+        }
+    })
+    
+    uIOhook.start();
+
+
+    window.on('ready-to-show', () => window.show())
 
     if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
         window.loadURL(process.env['ELECTRON_RENDERER_URL'])
@@ -78,10 +106,11 @@ app.whenReady().then(async () => {
 
         //Lifecycle handling for child process
         app.on("window-all-closed", async () => {
+            uIOhook.stop();
             app.quit();
             process.kill(pid);
         });
-        
+
     })
 
 

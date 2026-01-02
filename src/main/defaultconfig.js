@@ -5,7 +5,7 @@ function useDefaultConfig() {
             webSocket: "ws://127.0.0.1:9001",
             development : {
                 showInspector : false,
-                sendPings : false, 
+                sendPings : true, 
             },
             extensions: [
                 {
@@ -22,8 +22,14 @@ function useDefaultConfig() {
                     hideOnClickthrough: true
                 }
             },
+            messages : {
+                maxStored : 500
+            },
             inputBindings: {
-                clickthrough: "Tab"
+                clickthrough: { 
+                    key : "CapsLock",
+                    type : "keydown",
+                }
             }
 
         }
